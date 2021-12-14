@@ -1,0 +1,20 @@
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+jobs:
+  build:
+    runs-on: windows-latest
+    env:
+      NODEJS_VERSION: 14.18.2
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+      - name: Build NodeJS Windows x64
+        shell: powershell
+        run: .\build.bat %NODEJS_VERSION%
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with: node-shared-v%NODEJS_VERSION%-x64.zip
