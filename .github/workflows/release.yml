@@ -14,7 +14,7 @@ jobs:
           arch: amd64
       - name: Build NodeJS Windows x64
         shell: powershell
-        run: .\build.bat %NODEJS_VERSION%
+        run: .\build.bat ${{ env.NODEJS_VERSION }}
       - name: Release
         uses: softprops/action-gh-release@v1
-        with: node-shared-v%NODEJS_VERSION%-x64.zip
+        with: node-shared-v${{ env.NODEJS_VERSION }}-x64.zip
