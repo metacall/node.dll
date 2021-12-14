@@ -28,18 +28,16 @@ cmake -E tar xzf node_src.tar.gz || goto :error
 cd %loc%\node-v%NODEJS_VERSION% || goto :error
 python %loc%\NodeJSGYPPatch.py %loc%\node-v%NODEJS_VERSION%\node.gyp || goto :error
 call .\vcbuild.bat dll
-mkdir %loc%\node-shared-v%NODEJS_VERSION%-x64 || goto :error
-move %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.lib %loc%\node-shared-v%NODEJS_VERSION%-x64\libnode.lib || goto :error
-move %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.dll %loc%\node-shared-v%NODEJS_VERSION%-x64\libnode.dll || goto :error
 
 echo NodeJS Built Successfully
+
+powershell -Command "Compress-Archive" -Path %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.lib, %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.dll -DestinationPath %loc%\node-shared-v%NODEJS_VERSION%-x64.zip || goto :error
+
+echo Tarball Compressed Successfully
 
 rem Delete unnecesary data
 rmdir /S /Q %loc%\node-v%NODEJS_VERSION%
 rmdir /S /Q %loc%\nasm-2.15.05
-
-echo Compressing the Tarball
-powershell -Command "Compress-Archive" -Path %loc%\node-shared-v%NODEJS_VERSION%-x64 -DestinationPath %loc%\node-shared-v%NODEJS_VERSION%-x64.zip
 
 exit 0
 
