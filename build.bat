@@ -39,8 +39,7 @@ rmdir /S /Q %loc%\node-v%NODEJS_VERSION%
 rmdir /S /Q %loc%\nasm-2.15.05
 
 echo Compressing the Tarball
-cd ../..
-powershell -Command "Compress-Archive" -Path %loc%\node-shared-v%NODEJS_VERSION%-x64 -DestinationPath node-shared-v%NODEJS_VERSION%-x64.zip
+powershell -Command "Compress-Archive" -Path %loc%\node-shared-v%NODEJS_VERSION%-x64 -DestinationPath %loc%\node-shared-v%NODEJS_VERSION%-x64.zip
 
 exit 0
 
