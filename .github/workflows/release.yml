@@ -12,9 +12,11 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
-      - name: Build NodeJS Windows x64
-        shell: powershell
-        run: .\build.bat ${{ env.NODEJS_VERSION }}
+      # - name: Build NodeJS Windows x64
+      #   shell: powershell
+      #   run: .\build.bat ${{ env.NODEJS_VERSION }}
       - name: Release
         uses: softprops/action-gh-release@v1
-        with: .\node-shared-v${{ env.NODEJS_VERSION }}-x64.zip
+        with:
+          files: .\build.bat
+          # files: .\node-shared-v${{ env.NODEJS_VERSION }}-x64.zip
