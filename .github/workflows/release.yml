@@ -17,4 +17,4 @@ jobs:
         run: .\build.bat ${{ env.NODEJS_VERSION }}
       - name: Release
         uses: softprops/action-gh-release@v1
-        with: node-shared-v${{ env.NODEJS_VERSION }}-x64.zip
+        with: .\node-shared-v${{ env.NODEJS_VERSION }}-x64.zip
