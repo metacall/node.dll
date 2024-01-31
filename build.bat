@@ -19,7 +19,7 @@ del nasm.zip
 echo Downloading Dependencies
 
 powershell -Command "(New-Object Net.WebClient).DownloadFile('https://nodejs.org/download/release/v%NODEJS_VERSION%/node-v%NODEJS_VERSION%.tar.gz', './node_src.tar.gz')" || goto :error
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/metacall/core/66fcaac300611d1c4210023e7b260296586a42e0/cmake/NodeJSGYPPatch.py', './NodeJSGYPPatch.py')" || goto :error
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/metacall/core/203a3e79c57d75bb2b7e3599bd65da64ced9d303/cmake/NodeJSGYPPatch.py', './NodeJSGYPPatch.py')" || goto :error
 
 echo Building NodeJS as Shared Library
 
@@ -31,7 +31,7 @@ call .\vcbuild.bat dll
 
 echo NodeJS Built Successfully
 
-powershell -Command "$global:ProgressPreference = 'SilentlyContinue'; Compress-Archive" -Path %loc%\node-v%NODEJS_VERSION%\out\Release\node.lib, %loc%\node-v%NODEJS_VERSION%\out\Release\node.dll -DestinationPath %loc%\node-shared-v%NODEJS_VERSION%-x64.zip || goto :error
+powershell -Command "$global:ProgressPreference = 'SilentlyContinue'; Compress-Archive" -Path %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.lib, %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.dll -DestinationPath %loc%\node-shared-v%NODEJS_VERSION%-x64.zip || goto :error
 
 echo Tarball Compressed Successfully
 
