@@ -31,6 +31,7 @@ call .\vcbuild.bat dll
 
 echo NodeJS Built Successfully
 
+dir %loc%\node-v%NODEJS_VERSION%\out\Release
 powershell -Command "$global:ProgressPreference = 'SilentlyContinue'; Compress-Archive" -Path %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.lib, %loc%\node-v%NODEJS_VERSION%\out\Release\libnode.dll -DestinationPath %loc%\node-shared-v%NODEJS_VERSION%-x64.zip || goto :error
 
 echo Tarball Compressed Successfully
