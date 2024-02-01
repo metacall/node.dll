@@ -36,6 +36,9 @@ powershell -Command "$global:ProgressPreference = 'SilentlyContinue'; Compress-A
 
 echo Tarball Compressed Successfully
 
+rem Debug current path in order to check that the tarball was generated
+dir %loc%
+
 rem Delete unnecesary data
 rmdir /S /Q %loc%\node-v%NODEJS_VERSION%
 rmdir /S /Q %loc%\nasm-2.15.05
